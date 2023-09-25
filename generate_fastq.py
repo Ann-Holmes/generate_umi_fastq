@@ -6,6 +6,8 @@ from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.Seq import Seq
 from generate_kmers_dna import generate_kmers, generate_DNA_cy
+# Before import generate_kmers and generate_DNA_cy， 
+# please run "python setup.py build_ext --inplace" for build cython code
 
 
 @click.group()
@@ -136,7 +138,8 @@ def generate_mapped_fastq(fasta: str, n_reads: int, read_size: int = 146, n_umis
     return fastq
 
 
-@click.command(help="Generate single-end fastq file content by reference genome, number reads and read size")
+@click.command(help="Generate single-end fastq file content by reference genome, number reads and "
+               "read size")
 @click.argument("fasta", type=str)
 @click.argument("fastq", type=str)
 @click.option("--n_reads", type=int, default=10000, help="Number of reads")
@@ -156,7 +159,8 @@ def generate_mapped_fastq_SE(fasta: str, fastq: str, n_reads: int, read_size: in
         SeqIO.write(fastq, output_handle, "fastq")
 
 
-@click.command(help="Generate paired-end fastq file content by reference genome, number reads and read size")
+@click.command(help="Generate paired-end fastq file content by reference genome, number reads and "
+               "read size")
 @click.argument("fasta", type=str)
 @click.argument("fastq_bn", type=str)
 @click.option("--n_reads", type=int, default=10000, help="Number of reads")
